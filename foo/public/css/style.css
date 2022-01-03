@@ -1,9 +1,15 @@
+:root {
+  --dark-blue-color: #191970;
+  --light-blue-color: #4e9af1;
+  --white-shadow: drop-shadow(0px 0px 20px white);
+}
+
 body {
   background-image: url("../images/yarn1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  background-color: #191970;
+  background-color: var(--dark-blue-color);
   padding: 50px;
   font: 14px 'Raleway', sans-serif;
   color: white;
@@ -36,14 +42,13 @@ h1 {
   display: inline-block;
   font-size: 3em;
   font-weight: bolder;
-  background-color: #4e9af1;
+  background-color: var(--light-blue-color);
   border: 5px solid;
   border-color: white;
-  /* filter:drop-shadow(0px 0px 20px white); */
-  }
+   }
 
 strong {
-  color: #191970;
+  color: var(--dark-blue-color);
 }
 
 h2 {
@@ -51,28 +56,29 @@ h2 {
   margin-left: auto;
   margin-right: auto;
   font-weight: bold;
-  color: #191970;
+  color: var(--dark-blue-color);
 }
 
 img {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  padding-top: 1em;
   border-radius: 20%;
-  filter:drop-shadow(0px 0px 7px white);
+  filter: var(--white-shadow)
 }
 
 hr {
   width: 70%;
-  border-top: 1px solid #191970;
-  border-bottom: 1px solid #191970;
+  border-top: 1px solid var(--dark-blue-color);
+  border-bottom: 1px solid var(--dark-blue-color);
   display: block;
   height: 1px;
   }
 
 button {
   display: inline-block;
-  background-color:#4e9af1;
+  background-color:var(--light-blue-color);
   padding:0.3em 1.2em;
   margin:0 0.1em 0.1em 0;
   border:0.16em solid rgba(255,255,255,0);
@@ -81,15 +87,15 @@ button {
   text-decoration:none;
   font-family:'Roboto',sans-serif;
   font-weight:300;
-  color:#FFFFFF;
+  color:white;
   text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
   text-align:center;
   transition: all 0.2s;
-  filter:drop-shadow(0px 0px 20px white);
+  filter: var(--white-shadow);
   }
 
   button:hover{
-  border-color: rgba(255,255,255,1);
+  border-color: white;
   }
   @media all and (max-width:30em){
   
@@ -104,7 +110,7 @@ button {
   flex-wrap: wrap;
   grid-template-columns: 25% 25% 25% 25%;
   padding: 10px;
-  filter:drop-shadow(0px 0px 20px white);
+  filter: var(--white-shadow);
  }
 
 #create-search-project {
@@ -113,18 +119,13 @@ button {
   grid-template-columns: 25% 25%;
   justify-content: center;
   padding: 10px;
-  filter:drop-shadow(0px 0px 20px white);
+  filter: var(--white-shadow);
 }
 
-#new-project p {
+.error {
   background-color: red;
   font-size: 1.5em;
-}
-
-#search-project p {
-  background-color: red;
-  font-size: 1.5em;
-}
+} 
 
 p {
   text-align: left;
@@ -134,9 +135,17 @@ article {
   padding: 10px;
   border: 5px solid;
   border-color: white;
-  background-color: #4e9af1;
+  background-color: var(--light-blue-color);
  }
 
- #searchProjects {
-   text-align: center;
- }
+table {
+  border-spacing: 10px;
+}
+
+.zoom {
+  transition: transform .2s;
+}
+
+.zoom:hover {
+  transform: scale(1.5); 
+}

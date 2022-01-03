@@ -1,4 +1,5 @@
 const url = "http://localhost:3000";
+
 const projectsSection = document.querySelector("#projects");
 const getProjectsButton = document.querySelector("#get-projects");
 const submitButton = document.querySelector("button[type='submit']");
@@ -12,12 +13,15 @@ const crochetInput = document.querySelector("#crochet");
 const inProgressInput = document.querySelector("#in-progress");
 const finishedInput = document.querySelector("#finished");
 const newProject = document.querySelector("#new-project");
-const searchProjectNameButton = document.querySelector
-("#byName");
+const searchProjectNameButton = document.querySelector("#byName");
 const searchProjectCraftButton = document.querySelector("#byCraft");
 const searchProjectStatusButton = document.querySelector("#byStatus");
-const searchProjectByName = document.querySelector("#search-project-name")
-const searchProject = document.querySelector("#search-project")
+const searchProjectByName = document.querySelector("#search-project-name");
+const searchProject = document.querySelector("#search-project");
+const searchKnitting = document.querySelector("#search-knitting");
+const searchCrochet = document.querySelector("#search-crochet");
+const searchInProgress = document.querySelector("#search-in-progress");
+const searchFinished = document.querySelector("#search-finished");
 
 
 getProjectsButton.addEventListener("click", handleClick);
@@ -34,7 +38,7 @@ function searchName(event) {
 async function searchProjectName() {
   if(searchProjectByName.value){
     projectsSection.innerText = "";
-    searchProject.removeChild(searchProject.lastChild);
+    searchProject.lastChild.innerText = "";
     const response = await fetch(`${url}/projects/?project_name=${searchProjectByName.value}`);
     const { payload } = await response.json();
     projectsSection.innerText = "";
@@ -50,6 +54,95 @@ async function searchProjectName() {
     catch(e) {
       const error = document.createElement("p");
       error.innerText = `${e.name}: ${e.message}`
+      error.classList = "error"
+      searchProject.appendChild(error);
+    }
+  }
+}
+
+function searchCraft(event) {
+  event.preventDefault();
+  searchCraftName();
+}
+
+async function searchCraftName() {
+  if(searchKnitting.checked){
+    projectsSection.innerText = "";
+    searchProject.lastChild.innerText = "";
+    const response = await fetch(`${url}/projects/?craft=${searchKnitting.value}`);
+    const { payload } = await response.json();
+    projectsSection.innerText = "";
+    if (payload === `There is no project with the craft ${searchKnitting.value}`){
+      const article = document.createElement("article");
+      article.innerText = payload
+      projectsSection.appendChild(article)} else {
+    payload.forEach(renderProject);
+    clearFields();}    
+      } else if (searchCrochet.checked) {
+        projectsSection.innerText = "";
+        searchProject.lastChild.innerText = "";
+        const response = await fetch(`${url}/projects/?craft=${searchCrochet.value}`);
+        const { payload } = await response.json();
+        projectsSection.innerText = "";
+        if (payload === `There is no project with the craft ${searchCrochet.value}`){
+          const article = document.createElement("article");
+          article.innerText = payload
+          projectsSection.appendChild(article)} else {
+          payload.forEach(renderProject);
+          clearFields();}    
+      } else { 
+    try {
+      throw new Error("Please select Knitting or Crochet to search");
+    }
+    catch(e) {
+      const error = document.createElement("p");
+      error.innerText = `${e.name}: ${e.message}`
+      error.classList = "error"
+      searchProject.appendChild(error);
+    }
+  }
+}
+
+
+
+function searchStatus(event) {
+  event.preventDefault();
+  searchStatus();
+}
+
+async function searchStatus() {
+  if(searchInProgress.checked){
+    projectsSection.innerText = "";
+    searchProject.lastChild.innerText = "";
+    const response = await fetch(`${url}/projects/?status=${searchInProgress.value}`);
+    const { payload } = await response.json();
+    projectsSection.innerText = "";
+    if (payload === `There is no project with the status ${searchInProgress.value}`){
+      const article = document.createElement("article");
+      article.innerText = payload
+      projectsSection.appendChild(article)} 
+      else {payload.forEach(renderProject)
+        clearFields();}    
+      } else if (searchFinished.checked) {
+        projectsSection.innerText = "";
+        searchProject.lastChild.innerText = "";
+        const response = await fetch(`${url}/projects/?status=${searchFinished.value}`);
+        const { payload } = await response.json();
+        projectsSection.innerText = "";
+        if (payload === `There is no project with the status ${searchFinished.value}`){
+          const article = document.createElement("article");
+          article.innerText = payload
+          projectsSection.appendChild(article)} else {
+          payload.forEach(renderProject)
+        clearFields()}    
+      } else { 
+    try {
+      throw new Error("Please select In Progress or Finished to search");
+    }
+    catch(e) {
+      const error = document.createElement("p");
+      error.innerText = `${e.name}: ${e.message}`
+      error.classList = "error"
       searchProject.appendChild(error);
     }
   }
@@ -68,10 +161,11 @@ async function searchProjectName() {
       catch(e) {
         const error = document.createElement("p");
         error.innerText = `${e.name}: ${e.message}`
-        document.querySelector("#new-project").appendChild(error);
+        error.classList = "error"
+        newProject.appendChild(error);
       }
     } else {
-      newProject.removeChild(newProject.lastChild);
+      newProject.lastChild.innerText = "";
       console.log(gatherFormData());
       const response = await fetch(`${url}/projects`, {
       method: "POST",
@@ -80,9 +174,8 @@ async function searchProjectName() {
     });
     const data = await response.json();
     console.log(data);
-    clearFields();
     getProjects();
-        
+    clearFields();
   };
   };
   
@@ -96,6 +189,11 @@ async function searchProjectName() {
     crochetInput.checked = false;
     inProgressInput.checked = false;
     finishedInput.checked = false;
+    searchProjectByName.value = null;
+    searchKnitting.checked = false;
+    searchCrochet.checked = false;
+    searchInProgress.checked = false;
+    searchFinished.checked = false;
   };
   
   function gatherFormData() {
@@ -130,7 +228,7 @@ async function searchProjectName() {
   function handleClick(event) {
     event.preventDefault();
     getProjects();
-  }
+     }
 
 async function getProjects() {
     const response = await fetch(`${url}/projects`);
@@ -138,6 +236,7 @@ async function getProjects() {
     projectsSection.innerText = "";
     console.log(payload);
     payload.forEach(renderProject);
+    clearFields();
   }
 
   function renderProject(project) {
@@ -163,6 +262,7 @@ async function getProjects() {
     imgPhoto.src = `${photo}`;
     imgPhoto.alt = 'Project picture'
     imgPhoto.width = '180';
+    imgPhoto.classList = 'zoom';
     const line = document.createElement("hr");
     article.appendChild(h2ProjectName);
     article.appendChild(line);
