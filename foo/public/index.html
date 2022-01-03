@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<br lang="en">
+  <head>
+    <title>Knitting and Crochet Projects</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway" rel="stylesheet">
+  </head>
+  <div class="navbar">
+    <h1><strong>Knitting and Crochet Projects</strong></h1>
+  </div>
+  <div class="main">
+    <button id="get-projects">Load all projects! ↻</button></br>
+    <section id="create-search-project">
+      <article id="new-project">
+        <h2>Add New Project</h2>
+        <table id="createNewProject">
+          <tr>
+            <td>Project Name:</td>
+            <td><input id="project-name"></input></td>
+          </tr>
+          <tr>
+            <td>Craft:</td>
+            <td><input type="radio" name="craft" id="knitting" value="Knitting">Knitting</input> <input type="radio" id="crochet" name="craft" value="Crochet">Crochet</input></td>
+          </tr>
+          <tr>
+            <td>Pattern:</td>
+            <td><input id="pattern"></input></td>
+          </tr>
+          <tr>
+            <td>Status:</td>
+            <td><input type="radio" name="status" id="in-progress" value="In Progress">In Progress</input> <input type="radio" name="status" id="finished" value="Finished">Finished</input></td>
+          </tr>
+          <tr>
+            <td>Yarn:</td>
+            <td><input id="yarn"></input></td>
+          </tr>
+          <tr>
+            <td>Notes:</td>
+            <td><textarea id="notes"></textarea></td>
+          </tr>
+          <tr>
+            <td>Photo:</td>
+            <td><input id="photo"></input></td>
+          </tr>
+          </table></br>
+          <button type="submit">Create Project</button>
+          </article>
+      <article id="search-project"><h2>Search Projects</h2>
+        <table id="searchProjects">
+          <tr>
+            <td><input id="search-project-name"></input></td>
+            <td><button id="byName">Search by Project Name</button></td>
+          </tr>
+          <tr>
+            <td><input type="radio" name="search-craft" id="search-knitting" value="Knitting">Knitting</input> <input type="radio" id="search-crochet" name="search-craft" value="Crochet">Crochet</input></td>
+            <td><button id="byCraft">Search by Craft</button></td>
+          </tr>
+          <tr>
+            <td><input type="radio" name="status" id="in-progress" value="In Progress">In Progress</input> <input type="radio" name="status" id="finished" value="Finished">Finished</input> </td>
+            <td><button id="byStatus">Search by Status</button></td>
+          </tr>
+</table>
+</article>
+        </section>
+    <section id="projects"></section>
+  </div>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
