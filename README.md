@@ -8,4 +8,6 @@ App allows creation of new craft projects, and searching for projects using name
 
 Had fun playing with this to make from start to finish solo, and testing out some CSS.
 
-![alt text](https://github.com/HWhelan256/knitting-and-crochet-projects/main/app.jpg)
+![App display](https://github.com/HWhelan256/knitting-and-crochet-projects/blob/main/app.jpg)
+
+![Lower app display](https://github.com/HWhelan256/knitting-and-crochet-projects/blob/main/app1.jpg)
